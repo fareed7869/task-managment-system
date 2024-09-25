@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import { connectDB, sequelize } from "./db/dbConnection.js";
 import taskRoutes from "./routes/taskRoute.js";
 
+
 dotenv.config();
 const app = express();
 
@@ -35,3 +36,4 @@ app.use("/api/tasks", taskRoutes);
 
 // Start the server
 startServer();
+
