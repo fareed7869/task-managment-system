@@ -64,12 +64,42 @@ const deleteTask = async (req, res) => {
   }
 };
 
+const searchTasks = async (req, res) => {
+  try {
+    const { query, page = 1, limit = 5 } = req.query;
+    const tasksData = await taskService.searchTasks(
+      query,
+      parseInt(page),
+      parseInt(limit)
+    );
+    return successResponse(res, "Tasks fetched successfully", tasksData);
+  } catch (error) {
+    return errorResponse(res, error.message);
+  }
+};
+
+const filteredTaskStatus = async (req, res) => {
+  try {
+    const { status, page = 1, limit = 5 } = req.query;
+    const tasksData = await taskService.filteredTaskStatus(
+      status,
+      parseInt(page),
+      parseInt(limit)
+    );
+    return successResponse(res, "Tasks fetched successfully", tasksData);
+  } catch (error) {
+    return errorResponse(res, error.message);
+  }
+};
+
 const taskController = {
   createTask,
   getTasks,
   getTask,
   updateTask,
   deleteTask,
+  searchTasks,
+  filteredTaskStatus,
 };
 
 export default taskController;

@@ -11,5 +11,8 @@ router.get("/getAllTask", taskController.getTasks);
 router.get("/getTaskById/:id", taskController.getTask);
 router.put("/updateTask/:id", taskController.updateTask);
 router.delete("/removeTask/:id", taskController.deleteTask);
+router.get('/search', taskController.searchTasks);
+router.get('/filteredTaskStatus', taskController.filteredTaskStatus);
+
 
 export default router;
