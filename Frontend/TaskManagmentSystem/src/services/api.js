@@ -19,3 +19,13 @@ export const deleteTask = async (id) => {
     throw error;
   }
 };
+
+export const getTask = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/getTaskById/${id}`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching task:", error);
+    throw error;
+  }
+};

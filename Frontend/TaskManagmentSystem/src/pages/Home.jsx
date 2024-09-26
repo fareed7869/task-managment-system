@@ -1,8 +1,11 @@
-// src/pages/Home.js
+// Home Page
 import React, { useState, useEffect } from "react";
 import { getTasks, deleteTask } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+  
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -17,6 +20,10 @@ const Home = () => {
   const handleDelete = async (id) => {
     await deleteTask(id);
     fetchTasks();
+  };
+
+  const handleView = (id) => {
+    navigate(`/tasks/${id}`);
   };
 
   return (
