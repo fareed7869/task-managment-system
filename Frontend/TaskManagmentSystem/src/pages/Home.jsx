@@ -1,6 +1,6 @@
 // src/pages/Home.js
 import React, { useState, useEffect } from "react";
-import { getTasks } from "../services/api";
+import { getTasks, deleteTask } from "../services/api";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
@@ -12,6 +12,11 @@ const Home = () => {
   const fetchTasks = async () => {
     const taskList = await getTasks();
     setTasks(taskList);
+  };
+
+  const handleDelete = async (id) => {
+    await deleteTask(id);
+    fetchTasks();
   };
 
   return (
