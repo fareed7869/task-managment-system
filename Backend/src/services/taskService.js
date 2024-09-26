@@ -6,8 +6,17 @@ const createTask = async (taskData) => {
   return await models.Task.create(taskData);
 };
 
-const getAllTasks = async () => {
-  return await models.Task.findAll();
+// const getAllTasks = async () => {
+//   return await models.Task.findAll();
+// };
+
+const getAllTasks = async (page, limit) => {
+  const offset = (page - 1) * limit;
+  const tasks = await models.Task.findAndCountAll({ limit, offset });
+  return {
+    tasks: tasks.rows,
+    totalPages: Math.ceil(tasks.count / limit),
+  };
 };
 
 const getTaskById = async (id) => {
