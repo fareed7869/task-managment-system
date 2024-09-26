@@ -2,20 +2,30 @@
 import React, { useState, useEffect } from "react";
 import { getTasks, deleteTask } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import Pagination from '../components/Pagination';
 
 const Home = () => {
     const navigate = useNavigate();
 
     const [tasks, setTasks] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
 
     useEffect(() => {
-        fetchTasks();
-    }, []);
+        fetchTasks(currentPage);
+    }, [currentPage]);
 
-    const fetchTasks = async () => {
-        const taskList = await getTasks();
-        setTasks(taskList);
-    };
+    // const fetchTasks = async () => {
+    //     const taskList = await getTasks();
+    //     setTasks(taskList);
+    // };
+
+    const fetchTasks = async (page) => {
+        const taskData = await getTasks(page);
+        setTasks(taskData.tasks);
+        setTotalPages(taskData.totalPages);
+      };
 
     const handleDelete = async (id) => {
         await deleteTask(id);
@@ -29,6 +39,10 @@ const Home = () => {
     const handleUpdate = (id) => {
         navigate(`/updateTask/${id}`);
       };
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
 
     return (
         <div className="bg-gray-900 min-h-screen py-10">
@@ -103,6 +117,9 @@ const Home = () => {
                                 ))}
                             </tbody>
                         </table>
+
+                        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+
                     </div>
                 </div>
             </div>
