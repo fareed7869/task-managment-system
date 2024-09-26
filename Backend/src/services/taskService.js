@@ -1,6 +1,7 @@
 // task service file that handle business logic
 
 import models from "../models/index.js";
+import { Op } from 'sequelize';
 
 const createTask = async (taskData) => {
   return await models.Task.create(taskData);
@@ -44,4 +45,37 @@ const deleteTask = async (id) => {
   await task.destroy();
 };
 
-export { createTask, getAllTasks, getTaskById, updateTask, deleteTask };
+const searchTasks = async (searchTerm, page, limit) => {
+    const offset = (page - 1) * limit;
+    const tasks = await models.Task.findAndCountAll({
+      where: {
+        title: {
+          [Op.iLike]: `%${searchTerm}%`, // Case-insensitive search
+        },
+      },
+      limit,
+      offset,
+    });
+    return {
+      tasks: tasks.rows,
+      totalPages: Math.ceil(tasks.count / limit),
+    };
+  };
+
+  const filteredTaskStatus = async (status, page, limit) => {
+    const offset = (page - 1) * limit;
+    const tasks = await models.Task.findAndCountAll({
+        where: {
+            status: status
+            
+          },
+      limit,
+      offset,
+    });
+    return {
+      tasks: tasks.rows,
+      totalPages: Math.ceil(tasks.count / limit),
+    };
+  };
+  
+export { createTask, getAllTasks, getTaskById, updateTask, deleteTask, searchTasks, filteredTaskStatus };
