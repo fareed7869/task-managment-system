@@ -10,3 +10,12 @@ export const getTasks = async () => {
     throw error;
   }
 };
+
+export const deleteTask = async (id) => {
+  try {
+    await axios.delete(`${API_URL}/removeTask/${id}`);
+  } catch (error) {
+    console.error("Error deleting task:", error);
+    throw error;
+  }
+};
