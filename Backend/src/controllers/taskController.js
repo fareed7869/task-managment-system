@@ -12,10 +12,23 @@ const createTask = async (req, res) => {
   }
 };
 
+// const getTasks = async (req, res) => {
+//   try {
+//     const tasks = await taskService.getAllTasks();
+//     return successResponse(res, "Tasks fetched successfully", tasks);
+//   } catch (error) {
+//     return errorResponse(res, error.message);
+//   }
+// };
+
 const getTasks = async (req, res) => {
   try {
-    const tasks = await taskService.getAllTasks();
-    return successResponse(res, "Tasks fetched successfully", tasks);
+    const { page = 1, limit = 5 } = req.query;
+    const tasksData = await taskService.getAllTasks(
+      parseInt(page),
+      parseInt(limit)
+    );
+    return successResponse(res, "Tasks fetched successfully", tasksData);
   } catch (error) {
     return errorResponse(res, error.message);
   }
