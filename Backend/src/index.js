@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import { connectDB, sequelize } from "./db/dbConnection.js";
 import taskRoutes from "./routes/taskRoute.js";
-
+import authRoutes from "./routes/userRoute.js"
 
 dotenv.config();
 const app = express();
@@ -33,6 +33,7 @@ const startServer = async () => {
 
 // Routes
 app.use("/api/tasks", taskRoutes);
+app.use('/api/auth', authRoutes);
 
 // Start the server
 startServer();
