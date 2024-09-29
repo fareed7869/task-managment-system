@@ -4,6 +4,7 @@ import TaskDetail from './pages/TaskDetail';
 import AddTask from './pages/AddTask';
 import UpdateTask from './pages/UpdateTask';
 import SignUpPage from "./pages/SignUp";
+import LoginPage from "./pages/Login";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/addTask" element={<AddTask />} />
         <Route path="/updateTask/:id" element={<UpdateTask />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Router>
   );
