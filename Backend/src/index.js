@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import { connectDB, sequelize } from "./db/dbConnection.js";
 import taskRoutes from "./routes/taskRoute.js";
 import authRoutes from "./routes/userRoute.js"
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
@@ -13,6 +14,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser()); 
+
 
 const startServer = async () => {
   try {
