@@ -8,7 +8,7 @@ import { authorize } from '../middlewares/authorization.js';
 const router = Router();
 
 router.post("/createTask", taskController.createTask);
-router.get("/getAllTask", taskController.getTasks);
+router.get("/getAllTask",auth, taskController.getTasks);
 router.get("/getTaskById/:id", taskController.getTask);
 router.put("/updateTask/:id", taskController.updateTask);
 router.delete("/removeTask/:id",auth,authorize(['admin']), taskController.deleteTask);
