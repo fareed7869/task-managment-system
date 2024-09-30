@@ -13,8 +13,11 @@ const generateRefreshToken = (payload) => {
     return jwt.sign(payload, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' });
 };
 
-
 const registerUser = async (userData) => {
+    const email = userData.email
+    const checkuser = await models.User.findOne({ where: { email } });
+    if (checkuser) throw new Error("User Already Exist");
+
     const user = await models.User.create(userData);
     return user;
 };

@@ -7,13 +7,13 @@ import { authorize } from '../middlewares/authorization.js';
 
 const router = Router();
 
-router.post("/createTask", taskController.createTask);
-router.get("/getAllTask", taskController.getTasks);
-router.get("/getTaskById/:id", taskController.getTask);
-router.put("/updateTask/:id", taskController.updateTask);
+router.post("/createTask",auth, taskController.createTask);
+router.get("/getAllTask",auth, taskController.getTasks);
+router.get("/getTaskById/:id",auth, taskController.getTask);
+router.put("/updateTask/:id",auth, taskController.updateTask);
 router.delete("/removeTask/:id",auth,authorize(['admin']), taskController.deleteTask);
-router.get('/search', taskController.searchTasks);
-router.get('/filteredTaskStatus', taskController.filteredTaskStatus);
+router.get('/search',auth, taskController.searchTasks);
+router.get('/filteredTaskStatus',auth, taskController.filteredTaskStatus);
 
 
 export default router;
