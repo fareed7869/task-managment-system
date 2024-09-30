@@ -66,9 +66,13 @@ const refreshToken = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-    res.clearCookie("accessToken");
-    res.clearCookie("refreshToken");
-    return successResponse(res, "Logged out successfully");
+    try {
+        res.clearCookie("accessToken");
+        res.clearCookie("refreshToken");
+        return successResponse(res, "Logged out successfully");
+    } catch (error) {
+        return errorResponse(res, error.message);
+    }
 };
 
 const userAuthController = {

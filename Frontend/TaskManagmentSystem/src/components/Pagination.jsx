@@ -43,7 +43,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                 key={index + 1}
                 onClick={() => onPageChange(index + 1)}
                 className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold text-white ring-1 ring-inset ring-gray-600 hover:bg-gray-700 focus:z-20 ${
-                  currentPage === index + 1 ? 'bg-indigo-600' : 'bg-gray-800'
+                  currentPage === index + 1 ? 'bg-blue-600' : 'bg-gray-800'
                 }`}
               >
                 {index + 1}

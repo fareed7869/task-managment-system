@@ -4,9 +4,14 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { BeatLoader } from "react-spinners";
+import { login } from '../services/api';
+import { setUser } from '../store/userSlice';
+import { useDispatch } from 'react-redux';
 
 const LoginPage = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const [email, setEmail] = useState();
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -30,8 +35,21 @@ const LoginPage = () => {
         setShowPassword(!showPassword);
     };
 
-    const submit = () => {
-
+    const submit = async () => {
+        setLoading(true);
+        try {
+            const data = await login(email, password);
+            dispatch(setUser(data.data.user));
+            navigate('/');
+        } catch (err) {
+            console.error(err);
+            setError(err.response?.data?.message || 'Login failed');
+            setTimeout(() => {
+                setError(null);
+            }, 1500);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (

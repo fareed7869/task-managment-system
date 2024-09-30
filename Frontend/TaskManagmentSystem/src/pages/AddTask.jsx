@@ -19,7 +19,6 @@ const AddTask = () => {
             setTimeout(() => {
                 setError(null);
             }, 1500);
-            return;
         }
 
         try {
@@ -94,6 +93,7 @@ const AddTask = () => {
                             className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-300 transform hover:scale-105"
                         >
                             {loading ? 'Submitting...' : 'Add Task'}
+
                         </button>
                         <button
                             type="button"
