@@ -1,5 +1,9 @@
 ## task-managment-system
 This is a full-stack Task Management System.
+
+## Deployment
+This project is deployed on Vercel. You can access the live version here:
+[Vercel Deployment](https://tms-dev-frontend.vercel.app)
 ## Features
 - **Task Management**: Create, update, delete, and view tasks.
 - **User Authentication**: Signup, login, and logout with JWT-based authentication.
@@ -56,6 +60,7 @@ Before running the application, make sure you have the following tools installed
    - cd Frontend
    - npm i (install dependencies)
    - start: npm run dev
+
 
 
    
